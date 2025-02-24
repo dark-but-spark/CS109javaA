@@ -2,14 +2,56 @@ package code.w1;
 
 import java.util.Scanner;
 public class Main{
-    public static double read(char c,int x)
+    public static double abs(double __)
     {
-        if(c==)
+        return __>0 ? __:-__;
+    }
+    public static double read(String __)
+    {
+        int ___=0,flag=0;
+        for(int i=0;i<__.length();i++)
+        {
+            if(__.charAt(i)=='-')
+            {
+                flag=1;
+            }
+            if(__.charAt(i)>='0' && __.charAt(i)<='9')
+            {
+                ___=___*10+__.charAt(i)-'0';
+            }
+        }
+        if(flag==1) ___=-___;
+        if(__.charAt(0)=='C')
+        {
+            return ___*1.0;
+        }
+        else if (__.charAt(0)=='F')
+        {
+            return (___-32.0)*5.0/9.0;
+        }
+        else if(__.charAt(0)=='K')
+        {
+            return ___-273.15;
+        }
+        return -1111.0;
     }
     public static void main(String[] args) {
         Scanner scanf=new Scanner(System.in);
-        int l=scanf.nextInt(),r=scanf.nextInt();
-        
+        double mn=1e9+7,now;
+        now=read(scanf.nextLine());
+        int n=Integer.parseInt(scanf.nextLine()),mnid=0;
+        for(int i=1;i<=n;i++)
+        {
+            double door=read(scanf.nextLine());
+            // System.out.printf("%f\n",door);
+            if(mn>abs(door-now))
+            {
+                mn=abs(door-now);
+                mnid=i;
+            } 
+        }
+        System.out.printf("%d",mnid);
+        scanf.close();
     }
 }
 /* 
