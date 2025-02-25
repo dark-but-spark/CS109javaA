@@ -1,49 +1,50 @@
 package code.w1;
 
 import java.util.Scanner;
-public class Main{
-    public static double abs(double __)
+public class Main //for problem 4
+ {
+    public static double abs(double x)
     {
-        return __>0 ? __:-__;
+        return x>0 ? x:-x;
     }
-    public static double read(String __)
+    public static double read(String x,double sum)
     {
-        int ___=0,flag=0;
-        for(int i=0;i<__.length();i++)
+        // int sum=0,flag=0;
+        // for(int i=0;i<x.length();i++)
+        // {
+        //     if(x.charAt(i)=='-')
+        //     {
+        //         flag=1;
+        //     }
+        //     if(x.charAt(i)>='0' && x.charAt(i)<='9')
+        //     {
+        //         sum=sum*10+x.charAt(i)-'0';
+        //     }
+        // }
+        // if(flag==1) sum=-sum;
+        if(x.charAt(0)=='C')
         {
-            if(__.charAt(i)=='-')
-            {
-                flag=1;
-            }
-            if(__.charAt(i)>='0' && __.charAt(i)<='9')
-            {
-                ___=___*10+__.charAt(i)-'0';
-            }
+            return sum*1.0;
         }
-        if(flag==1) ___=-___;
-        if(__.charAt(0)=='C')
+        else if (x.charAt(0)=='F')
         {
-            return ___*1.0;
+            return (sum-32.0)*5.0/9.0;
         }
-        else if (__.charAt(0)=='F')
+        else if(x.charAt(0)=='K')
         {
-            return (___-32.0)*5.0/9.0;
-        }
-        else if(__.charAt(0)=='K')
-        {
-            return ___-273.15;
+            return sum-273.15;
         }
         return -1111.0;
     }
     public static void main(String[] args) {
         Scanner scanf=new Scanner(System.in);
-        double mn=1e9+7,now;
-        now=read(scanf.nextLine());
-        int n=Integer.parseInt(scanf.nextLine()),mnid=0;
+        double mn=1e9+7,now=0;
+        now=read(scanf.next(),scanf.nextDouble());
+        int n=scanf.nextInt(),mnid=0;
         for(int i=1;i<=n;i++)
         {
-            double door=read(scanf.nextLine());
-            // System.out.printf("%f\n",door);
+            double door=read(scanf.next(),scanf.nextDouble());
+            //  System.out.printf("%f\n",door);
             if(mn>abs(door-now))
             {
                 mn=abs(door-now);
@@ -55,7 +56,7 @@ public class Main{
     }
 }
 /* 
-public class Main3
+public class Main// for problem 3
 {
     public static boolean check(int x)
     {
@@ -97,7 +98,8 @@ public class Main3
          scanf.close();
     }
 }
-public class Main2 {
+public class Main // for problem 2
+ {
 
     public static void main(String[] args) {
         Scanner scanf=new Scanner(System.in);
@@ -142,7 +144,8 @@ public class Main2 {
     }
 
 }
-public class Main1 {
+public class Main //for problem 1
+{
     public static void main(String[] args) {
         Scanner scanf=new Scanner(System.in);
         int n=scanf.nextInt();

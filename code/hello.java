@@ -1,4 +1,5 @@
 package code;
+ 
 import java.util.Scanner;
 class hello
 {
