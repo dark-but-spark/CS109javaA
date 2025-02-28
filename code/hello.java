@@ -22,7 +22,9 @@ class A{
 
 class hello {
     public int f(int x) {
+        System.out.printf("%d",g(5));
         return x * x;
+
     }
 
     public static int g(int x) {
@@ -46,16 +48,16 @@ class hello {
         // System.out.print(a+b);
         // System.out.println(a+b);
         // scanner.close();
-        System.out.printf("hello %d \n", f(5));
+        // System.out.printf("hello %d \n", f(5));
         System.out.printf("hello %d \n", g(5));
-        System.out.printf("hello %d \n", h(5));
+        // System.out.printf("hello %d \n", h(5));
         System.out.printf("hello %d \n", i(5));
         A a = new A();
         System.out.printf("hello %d \n", a.a(5));  
-        System.out.printf("hello %d \n", a.b(5));
+        // System.out.printf("hello %d \n", a.b(5));
         System.out.printf("hello %d \n",A.b(5));
-        System.out.printf("hello %d \n", a.c(5));
-        System.out.printf("hello %d \n", a.d(5));
+        // System.out.printf("hello %d \n", a.c(5));
+        // System.out.printf("hello %d \n", a.d(5));
 
     }
 }
