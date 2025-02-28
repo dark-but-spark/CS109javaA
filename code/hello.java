@@ -24,7 +24,6 @@ class hello {
     public int f(int x) {
         System.out.printf("%d",g(5));
         return x * x;
-
     }
 
     public static int g(int x) {
@@ -33,6 +32,7 @@ class hello {
 
     private int h(int x) {
         return x * x + 2;
+        
     }
 
     private static int i(int x) {
