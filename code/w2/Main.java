@@ -2,9 +2,11 @@ package code.w2;
 import java.util.Scanner;
 class Main{
     static int n,m;
-    static int[][] a,f,vis;
-    public static int dp(int x,int y)
+    static int[][] f,vis;
+    static double[][] a;
+    public static double dp(int x,int y)
     {
+        // System.out.printf("%d %d\n",x,y);
         if(vis[x][y]==1)
         {
             return 0;
@@ -19,35 +21,36 @@ class Main{
         {
             if(f[x+1][y]+f[x-1][y]+f[x][y+1]+f[x][y-1]>=3)
             {
-                dp(x+1,y);
-                dp(x-1,y);
-                dp(x,y+1);
-                dp(x,y-1);
-                if(f[x+1][y]+f[x-1][y]+f[x][y+1]+f[x][y-1]>=3)
-                {
-                    System.out.println("DATA CANNOT BE REPAIRED");
-                    System.exit(0);
-                }
+                // dp(x+1,y);
+                // dp(x-1,y);
+                // dp(x,y+1);
+                // dp(x,y-1);
+                // if(f[x+1][y]+f[x-1][y]+f[x][y+1]+f[x][y-1]>=3)
+                // {
+                //     System.out.println("DATA CANNOT BE REPAIRED");
+                //     System.exit(0);
+                // }
+                return -1;
             }
             if(f[x+1][y]+f[x-1][y]+f[x][y+1]+f[x][y-1]==2)
             {
-                if(f[x+1][y]==1&&f[x-1][y]==1)
+                if(f[x][y+1]==1&&f[x][y-1]==1)
                 {
                     f[x][y]=0;
                     vis[x][y]=0;
-                    return a[x][y]=dp(x+1,y)*2/5+dp(x-1,y)*3/5;
+                    return a[x][y]=dp(x+1,y)/2+dp(x-1,y)/2;
                 }
-                else if(f[x][y+1]==1&&f[x][y-1]==1)
+                else if(f[x+1][y]==1&&f[x-1][y]==1)
                 {
                     f[x][y]=0;
                     vis[x][y]=0;
-                    return a[x][y]=dp(x,y+1)*1/2+dp(x,y-1)*1/2;
+                    return a[x][y]=dp(x,y+1)*3/5+dp(x,y-1)*2/5;
                 }
                 else 
                 {
                     f[x][y]=0;
                     vis[x][y]=0;
-                    return a[x][y]=(f[x+1][y]==0? dp(x+1,y):dp(x-1,y))*3/5+(f[x][y+1]==0? dp(x,y+1):dp(x,y-1))*2/5;
+                    return a[x][y]=(f[x+1][y]==0? dp(x+1,y):dp(x-1,y))*2/5+(f[x][y+1]==0? dp(x,y+1):dp(x,y-1))*3/5;
                 }
             }
             else if(f[x+1][y]+f[x-1][y]+f[x][y+1]+f[x][y-1]==1)
@@ -56,25 +59,25 @@ class Main{
                 {
                     f[x][y]=0;
                     vis[x][y]=0;
-                    return a[x][y]=dp(x-1,y)*3/10+dp(x,y+1)*7/20+dp(x,y-1)*7/20;
+                    return a[x][y]=dp(x-1,y)/5+dp(x,y+1)*2/5+dp(x,y-1)*2/5;
                 }
                 else if(f[x-1][y]==1)
                 {
                     f[x][y]=0;
                     vis[x][y]=0;
-                    return a[x][y]=dp(x+1,y)*3/10+dp(x,y+1)*7/20+dp(x,y-1)*7/20;
+                    return a[x][y]=dp(x+1,y)/5+dp(x,y+1)*2/5+dp(x,y-1)*2/5;
                 }
                 else if(f[x][y+1]==1)
                 {
                     f[x][y]=0;
                     vis[x][y]=0;
-                    return a[x][y]=dp(x,y-1)/5+dp(x+1,y)*2/5+dp(x-1,y)*2/5;
+                    return a[x][y]=dp(x+1,y)*7/20+dp(x-1,y)*7/20+dp(x,y-1)*3/10;
                 }
                 else
                 {
                     f[x][y]=0;
                     vis[x][y]=0;
-                    return a[x][y]=dp(x,y+1)/5+dp(x+1,y)*2/5+dp(x-1,y)*2/5;
+                    return a[x][y]=dp(x+1,y)*7/20+dp(x-1,y)*7/20+dp(x,y+1)*3/10;
                 }
             }
             else
@@ -92,9 +95,17 @@ class Main{
         Scanner scan=new Scanner(System.in);
         n=scan.nextInt();
         m=scan.nextInt();
-        a=new int[n+10][m+10];
+        a=new double[n+10][m+10];
         f=new int[n+10][m+10];
         vis=new int[n+10][m+10];
+        for(int i=0;i<=n+1;i++)
+        {
+            f[i][0]=f[i][m+1]=1;
+        }
+        for(int i=0;i<=m+1;i++)
+        {
+            f[0][i]=f[n+1][i]=1;
+        }
         for(int i=1;i<=n;i++) for(int j=1;j<=m;j++)
         {
             a[i][j]=scan.nextInt();
@@ -102,18 +113,142 @@ class Main{
         }
         int x=scan.nextInt();
         int y=scan.nextInt();
-        int ans=dp(x,y);
+        double ans=dp(x,y);
         if(ans==-1)
         {
             System.out.println("DATA CANNOT BE REPAIRED");
         }
         else
         {
-            System.out.printf("%d",ans);
+            System.out.printf("%d",(int)ans);
         }
     }
 }
-/* 
+/*
+class Main3{
+    static int n,m;
+    static int[][] f,vis;
+    static double[][] a;
+    public static double dp(int x,int y)
+    {
+        // System.out.printf("%d %d\n",x,y);
+        if(vis[x][y]==1)
+        {
+            return 0;
+        }
+        vis[x][y]=1;
+        if(f[x][y]==0)
+        {
+            vis[x][y]=0;
+            return a[x][y];
+        }
+        if(f[x][y]==1)
+        {
+            if(f[x+1][y]+f[x-1][y]+f[x][y+1]+f[x][y-1]>=3)
+            {
+                // dp(x+1,y);
+                // dp(x-1,y);
+                // dp(x,y+1);
+                // dp(x,y-1);
+                // if(f[x+1][y]+f[x-1][y]+f[x][y+1]+f[x][y-1]>=3)
+                // {
+                //     System.out.println("DATA CANNOT BE REPAIRED");
+                //     System.exit(0);
+                // }
+                return -1;
+            }
+            if(f[x+1][y]+f[x-1][y]+f[x][y+1]+f[x][y-1]==2)
+            {
+                if(f[x][y+1]==1&&f[x][y-1]==1)
+                {
+                    f[x][y]=0;
+                    vis[x][y]=0;
+                    return a[x][y]=dp(x+1,y)/2+dp(x-1,y)/2;
+                }
+                else if(f[x+1][y]==1&&f[x-1][y]==1)
+                {
+                    f[x][y]=0;
+                    vis[x][y]=0;
+                    return a[x][y]=dp(x,y+1)*3/5+dp(x,y-1)*2/5;
+                }
+                else 
+                {
+                    f[x][y]=0;
+                    vis[x][y]=0;
+                    return a[x][y]=(f[x+1][y]==0? dp(x+1,y):dp(x-1,y))*2/5+(f[x][y+1]==0? dp(x,y+1):dp(x,y-1))*3/5;
+                }
+            }
+            else if(f[x+1][y]+f[x-1][y]+f[x][y+1]+f[x][y-1]==1)
+            {
+                if(f[x+1][y]==1)
+                {
+                    f[x][y]=0;
+                    vis[x][y]=0;
+                    return a[x][y]=dp(x-1,y)/5+dp(x,y+1)*2/5+dp(x,y-1)*2/5;
+                }
+                else if(f[x-1][y]==1)
+                {
+                    f[x][y]=0;
+                    vis[x][y]=0;
+                    return a[x][y]=dp(x+1,y)/5+dp(x,y+1)*2/5+dp(x,y-1)*2/5;
+                }
+                else if(f[x][y+1]==1)
+                {
+                    f[x][y]=0;
+                    vis[x][y]=0;
+                    return a[x][y]=dp(x+1,y)*7/20+dp(x-1,y)*7/20+dp(x,y-1)*3/10;
+                }
+                else
+                {
+                    f[x][y]=0;
+                    vis[x][y]=0;
+                    return a[x][y]=dp(x+1,y)*7/20+dp(x-1,y)*7/20+dp(x,y+1)*3/10;
+                }
+            }
+            else
+            {
+                f[x][y]=0;
+                vis[x][y]=0;
+                return a[x][y]=dp(x+1,y)/5+dp(x-1,y)/5+dp(x,y+1)*3/10+dp(x,y-1)*3/10;
+            }
+
+        }
+        return -1;
+    }
+    public static void main(String[] args)
+    {
+        Scanner scan=new Scanner(System.in);
+        n=scan.nextInt();
+        m=scan.nextInt();
+        a=new double[n+10][m+10];
+        f=new int[n+10][m+10];
+        vis=new int[n+10][m+10];
+        for(int i=0;i<=n+1;i++)
+        {
+            f[i][0]=f[i][m+1]=1;
+        }
+        for(int i=0;i<=m+1;i++)
+        {
+            f[0][i]=f[n+1][i]=1;
+        }
+        for(int i=1;i<=n;i++) for(int j=1;j<=m;j++)
+        {
+            a[i][j]=scan.nextInt();
+            f[i][j]=(a[i][j]==-1?1:0);
+        }
+        int x=scan.nextInt();
+        int y=scan.nextInt();
+        double ans=dp(x,y);
+        if(ans==-1)
+        {
+            System.out.println("DATA CANNOT BE REPAIRED");
+        }
+        else
+        {
+            System.out.printf("%d",(int)ans);
+        }
+    }
+}
 class Main2{
     static int n;
     static int[] cat,catf,dog,dogf; //0有数据,1无数据,2必死
