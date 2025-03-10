@@ -58,6 +58,5 @@ class hello {
         System.out.printf("hello %d \n",A.b(5));
         // System.out.printf("hello %d \n", a.c(5));
         // System.out.printf("hello %d \n", a.d(5));
-
     }
 }
