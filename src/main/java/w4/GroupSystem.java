@@ -1,5 +1,4 @@
 package w4;
-
 public class GroupSystem {
     private static int[] fa,size,vis;
     private static int n;
@@ -27,7 +26,7 @@ public class GroupSystem {
             Student student1=group.getStudent1();
             for(int i=0;i<n;i++)
             {
-                if(students[i].getStudentNumber()==student1.getStudentNumber())
+                if(students[i].getStudentNumber().equals(student1.getStudentNumber()))
                 {
                     x=i;
                     break;
@@ -114,6 +113,18 @@ public class GroupSystem {
         int top=0;
         for(int i=0;i<n;i++)
         {
+            for(int j=i+1;j<n;j++)
+            {
+                if(students[j-1].getGrade()<students[j].getGrade() )
+                {
+                    Student temp=students[j-1];
+                    students[j-1]=students[j];
+                    students[j]=temp;
+                }
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
             if(vis[i]==0)
             {
                 int mx=0,mxid=-1;
@@ -153,17 +164,17 @@ public class GroupSystem {
         return ans2;
 
     }
-    public static void main(String[] args) {
-        Student[]  students= new Student[4];
-        students[0] = new Student("12410101",'A',85);
-        students[1] = new Student("12410102",'A',90);
-        students[2] = new Student("12410104",'A',75);
-        students[3] = new Student("12410103",'A',80);
-
-
-        Group[] groups = GroupSystem.group(students);
-        for(Group g: groups){
-            System.out.println(g);
-        }
-    }
+//    public static void main(String[] args) {
+//        Student[]  students= new Student[4];
+//        students[0] = new Student("12410101",'A',85);
+//        students[1] = new Student("12410102",'A',90);
+//        students[2] = new Student("12410104",'A',75);
+//        students[3] = new Student("12410103",'A',80);
+//
+//
+//        Group[] groups = GroupSystem.group(students);
+//        for(Group g: groups){
+//            System.out.println(g);
+//        }
+//    }
 }

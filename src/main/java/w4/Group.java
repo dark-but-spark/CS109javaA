@@ -1,5 +1,4 @@
 package w4;
-
 public class Group {
     private Student student1;
     private Student student2;
@@ -38,9 +37,9 @@ public class Group {
 
     public boolean checkSameLab()
     {
-        if (student2 == null) 
+        if (student2==null)
         {
-            return student1.getLab() == this.lab;
+            return false;
         }
         else
         {
@@ -56,8 +55,10 @@ public class Group {
         }
         else
         {
-            String s1=student1.getStudentNumber().compareTo(student2.getStudentNumber())<0?student1.getStudentNumber():student2.getStudentNumber();
-            String s2=student1.getStudentNumber().compareTo(student2.getStudentNumber())>0?student1.getStudentNumber():student2.getStudentNumber();
+            String s1=student1.getStudentNumber().compareTo(student2.getStudentNumber())<0?
+                    student1.getStudentNumber():student2.getStudentNumber();
+            String s2=student1.getStudentNumber().compareTo(student2.getStudentNumber())>0?
+                    student1.getStudentNumber():student2.getStudentNumber();
             return this.lab+"_"+s1+"_"+s2;
         }
     }

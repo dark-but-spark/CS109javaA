@@ -1,5 +1,4 @@
 package w4;
-
 public class Student {
     private String studentNumber;
     private char lab;
