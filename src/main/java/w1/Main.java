@@ -1,4 +1,4 @@
-package code.w1;
+package w1;
 
 import java.util.Scanner;
 public class Main //for problem 4

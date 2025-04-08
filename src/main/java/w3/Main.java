@@ -1,4 +1,4 @@
-package code.w3;
+package w3;
 
 import java.util.Scanner;
 

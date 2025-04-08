@@ -1,4 +1,4 @@
-package code.w2;
+package w2;
 import java.util.Scanner;
 class Main{
     static int n,m;
@@ -122,6 +122,7 @@ class Main{
         {
             System.out.printf("%d",(int)ans);
         }
+        scan.close();
     }
 }
 /*
