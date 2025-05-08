@@ -20,11 +20,18 @@ public abstract class Vehicle {
         this.ArriveTime = new Time(arriveTime);
         this.LeaveTime = null;
     }
-    public Vehicle(Vehicle vehicle,Time leaveTime){
+    public Vehicle(Vehicle vehicle, Time leaveTime){
         this.plateNumber = vehicle.getPlateNumber();
         this.ArriveTime = new Time(vehicle.getAArriveTime());
         this.LeaveTime = new Time(leaveTime);
     }
+
+    public Vehicle(Vehicle vehicle){
+        this.plateNumber = vehicle.getPlateNumber();
+        this.ArriveTime = new Time(vehicle.getAArriveTime());
+        this.LeaveTime = null;
+    }
+
     @Override
     public String toString()
     {
@@ -32,6 +39,11 @@ public abstract class Vehicle {
     }
     public abstract int calculateMoney(Time leaveTime);
     public abstract int calculate(int time);
+
+    public String getClassName()
+    {
+        return "w6.Vehicle";
+    }
 
     //getter
     public String getPlateNumber() {return plateNumber;}

@@ -1,9 +1,7 @@
+package w6;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import w6.ConcreteParkingLot;
-import w6.ParkingLot;
-import w6.Time;
-import w6.Vehicle;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -29,14 +27,14 @@ public class spring25A6LocalTest {
     public void test01Reflect() {
         Class<?> clz = ConcreteParkingLot.class;
         Class<?> clzVehicle = Vehicle.class;
-        String[] expectFieldsParkingLot = {"private java.util.List ConcreteParkingLot.vehicles",
-                "private Time ConcreteParkingLot.currentTime",
-                "private final int ConcreteParkingLot.CAR_CAPACITY",
-                "private final int ConcreteParkingLot.BUS_CAPACITY"};
+        String[] expectFieldsParkingLot = {"private java.util.List w6.ConcreteParkingLot.vehicles",
+                "private w6.Time w6.ConcreteParkingLot.currentTime",
+                "private final int w6.ConcreteParkingLot.CAR_CAPACITY",
+                "private final int w6.ConcreteParkingLot.BUS_CAPACITY"};
         String[] expectFieldsVehicle = {
-                "protected java.lang.String Vehicle.plateNumber",
-                "protected boolean Vehicle.isInside",
-                "protected Time Vehicle.arriveTime"
+                "protected java.lang.String w6.Vehicle.plateNumber",
+                "protected boolean w6.Vehicle.isInside",
+                "protected w6.Time w6.Vehicle.arriveTime"
         };
         ArrayList<String> fields = Arrays.stream(clz.getDeclaredFields()).map(Field::toString).collect(Collectors.toCollection(ArrayList::new));
         for (String s : expectFieldsParkingLot) {
@@ -113,12 +111,12 @@ public class spring25A6LocalTest {
         assertEquals(35, parkingLot.currentIncome());
         assertEquals("car:3/4 bus:0/2", parkingLot.parkingLotStatus());
         assertEquals("01:58", parkingLot.getTime().toString());
-        String[] resultExcept = {"Car A00001 true 00:55",
-                "Car A00002 true 00:56",
-                "Car A00003 false null",
-                "Car A00004 true 00:58",
-                "Bus B00001 false null",
-                "Bus B00002 false null"};
+        String[] resultExcept = {"w6.Car A00001 true 00:55",
+                "w6.Car A00002 true 00:56",
+                "w6.Car A00003 false null",
+                "w6.Car A00004 true 00:58",
+                "w6.Bus B00001 false null",
+                "w6.Bus B00002 false null"};
         try {
             Field vehiclesField = ConcreteParkingLot.class.getDeclaredField("vehicles");
             vehiclesField.setAccessible(true);
@@ -162,13 +160,13 @@ public class spring25A6LocalTest {
         assertEquals("car:3/4 bus:1/2", parkingLot.parkingLotStatus());
         assertEquals("08:49", parkingLot.getTime().toString());
 
-        String[] resultExcept = {"Car A00001 true 00:55",
-                "Car A00002 false null",
-                "Car A00003 false null",
-                "Car A00004 true 03:37",
-                "Car A00005 true 03:38",
-                "Bus C12345 false null",
-                "Bus D12345 true 03:49"};
+        String[] resultExcept = {"w6.Car A00001 true 00:55",
+                "w6.Car A00002 false null",
+                "w6.Car A00003 false null",
+                "w6.Car A00004 true 03:37",
+                "w6.Car A00005 true 03:38",
+                "w6.Bus C12345 false null",
+                "w6.Bus D12345 true 03:49"};
         try {
             Field vehiclesField = ConcreteParkingLot.class.getDeclaredField("vehicles");
             vehiclesField.setAccessible(true);
@@ -195,15 +193,15 @@ public class spring25A6LocalTest {
         parkingLot.driveInto(1, "H12345", "H54321");
         parkingLot.minutesPassed(280);
         parkingLot.driveOut("E00001", "H54321");
-        assertEquals("Bus H12345 true", parkingLot.getVehicleByPlateNumber("H12345").toString());
-        assertEquals("Car F00002 true", parkingLot.getVehicleByPlateNumber("F00002").toString());
-        assertEquals("Car E00001 false", parkingLot.getVehicleByPlateNumber("E00001").toString());
-        assertEquals("Car A00003 true", parkingLot.getVehiclesByNumber().get(0).toString());
-        assertEquals("Car B00004 true", parkingLot.getVehiclesByNumber().get(1).toString());
-        assertEquals("Car E00001 false", parkingLot.getVehiclesByNumber().get(2).toString());
-        assertEquals("Car F00002 true", parkingLot.getVehiclesByNumber().get(3).toString());
-        assertEquals("Bus H12345 true", parkingLot.getVehiclesByNumber().get(4).toString());
-        assertEquals("Bus H54321 false", parkingLot.getVehiclesByNumber().get(5).toString());
+        assertEquals("w6.Bus H12345 true", parkingLot.getVehicleByPlateNumber("H12345").toString());
+        assertEquals("w6.Car F00002 true", parkingLot.getVehicleByPlateNumber("F00002").toString());
+        assertEquals("w6.Car E00001 false", parkingLot.getVehicleByPlateNumber("E00001").toString());
+        assertEquals("w6.Car A00003 true", parkingLot.getVehiclesByNumber().get(0).toString());
+        assertEquals("w6.Car B00004 true", parkingLot.getVehiclesByNumber().get(1).toString());
+        assertEquals("w6.Car E00001 false", parkingLot.getVehiclesByNumber().get(2).toString());
+        assertEquals("w6.Car F00002 true", parkingLot.getVehiclesByNumber().get(3).toString());
+        assertEquals("w6.Bus H12345 true", parkingLot.getVehiclesByNumber().get(4).toString());
+        assertEquals("w6.Bus H54321 false", parkingLot.getVehiclesByNumber().get(5).toString());
     }
 
     @Test
@@ -226,10 +224,10 @@ public class spring25A6LocalTest {
 
         List<String> result1 = parkingLot.getParkingRecordByArriveTime(new Time(8, 0), new Time(14, 0));
         List<String> result2 = parkingLot.getParkingRecordByArriveTime(new Time(8, 0), new Time(14, 0));
-        assertEquals("Car F00002 12:44 13:15",result1.get(0));
-        assertEquals("Car C12345 12:45 null",result1.get(1));
-        assertEquals("Bus H54321 12:55 13:15",result1.get(2));
-        assertEquals("Car F00002 12:44 13:15",result2.get(0));
-        assertEquals("Car C12345 12:45 null",result2.get(1));
+        assertEquals("w6.Car F00002 12:44 13:15",result1.get(0));
+        assertEquals("w6.Car C12345 12:45 null",result1.get(1));
+        assertEquals("w6.Bus H54321 12:55 13:15",result1.get(2));
+        assertEquals("w6.Car F00002 12:44 13:15",result2.get(0));
+        assertEquals("w6.Car C12345 12:45 null",result2.get(1));
     }
 }

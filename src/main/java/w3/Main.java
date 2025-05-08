@@ -136,7 +136,7 @@ class Matrix
             {
                 for(int o=0;o<this.colunm;o++)
                 {
-                    result.a[i][j]+=( (o+1)%Main.k==0? -1:1)*this.a[i][o]*that.a[o][j];
+                    result.a[i][j]+=( (o+1)%w6.Main.k==0? -1:1)*this.a[i][o]*that.a[o][j];
                 }
             }
         }

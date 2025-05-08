@@ -23,7 +23,7 @@ public class Time {
     public void addMinutes(int minutes) {
         this.minute+=minutes;
         this.hour+=this.minute/60;
-        this.minute%=60;
+        this.minute=(this.minute+60)%60;
         this.hour%=24;
     }
     @Override

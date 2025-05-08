@@ -3,7 +3,7 @@ package w6;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConcreteParkingLot implements ParkingLot{
+public class ConcreteParkingLot implements ParkingLot {
     private List<Vehicle> vehicles;
     private List<Vehicle> vehiclesHistory;
     private Time currentTime;
@@ -37,13 +37,13 @@ public class ConcreteParkingLot implements ParkingLot{
     public String parkingLotStatus()
     {
 //        cntCar=0;cntBus=0;
-//        for(Vehicle vehicle: vehicles)
+//        for(w6.Vehicle vehicle: vehicles)
 //        {
-//            if(vehicle instanceof Car && vehicle.getIsInside())
+//            if(vehicle instanceof w6.Car && vehicle.getIsInside())
 //            {
 //                cntCar++;
 //            }
-//            else if (vehicle instanceof Bus && vehicle.getIsInside())
+//            else if (vehicle instanceof w6.Bus && vehicle.getIsInside())
 //            {
 //                cntBus++;
 //            }
@@ -70,6 +70,7 @@ public class ConcreteParkingLot implements ParkingLot{
     }
     public void driveInto(int type, String... plateNumber)
     {
+        int cnt=0;
         if(type==0)
         {
             for(String plate: plateNumber)
@@ -106,13 +107,15 @@ public class ConcreteParkingLot implements ParkingLot{
                 {
                     break;
                 }
+                minutesPassed(1);
+                cnt++;
             }
         }
         else if(type==1)
         {
             for(String plate: plateNumber)
             {
-                if(cntCar<CAR_CAPACITY)
+                if(cntBus<BUS_CAPACITY)
                 {
                     Bus c=new Bus(plate);
                     int fl=0;
@@ -144,28 +147,37 @@ public class ConcreteParkingLot implements ParkingLot{
                 {
                     break;
                 }
+                minutesPassed(1);
+                cnt++;
             }
         }
         else
         {
             System.out.println("What f**king type are you?");
         }
+        if(cnt!=0)
+        {
+            minutesPassed(-1);
+        }
+//        minutesPassed(-1*cnt);
     }
     public void driveOut(String plateNumber)
     {
         for(Vehicle vehicle: vehicles)
         {
-            if(vehicle.getPlateNumber().equals(plateNumber)&&vehicle.getIsInside())
+            if(vehicle.getIsInside()&&vehicle.getPlateNumber().equals(plateNumber))
             {
                 for(Vehicle vehicleHistory: vehiclesHistory)
                 {
                     if(vehicleHistory.getPlateNumber().equals(plateNumber)&&
-                    vehicleHistory.getAArriveTime().toString().compareTo(vehicle.getAArriveTime().toString())==0)
+                    vehicleHistory.getAArriveTime().toString().compareTo(vehicle.getAArriveTime().toString())==0&&
+                    vehicleHistory.getLeaveTime()==null)
                     {
                         vehicleHistory.setLeaveTime(currentTime);
                     }
                 }
                 totalIncome+=vehicle.calculateMoney(currentTime);
+                vehicle.setIsInside(false);
                 if(vehicle instanceof Car)
                 {
                     cntCar--;
@@ -176,7 +188,9 @@ public class ConcreteParkingLot implements ParkingLot{
                 }
                 break;
             }
+
         }
+//        minutesPassed(1);
     }
     public void driveOut(String... plateNumber)
     {
@@ -184,6 +198,7 @@ public class ConcreteParkingLot implements ParkingLot{
         {
             driveOut(plate);
         }
+//        minutesPassed(-1*plateNumber.length);
     }
     public Vehicle getVehicleByPlateNumber(String plateNumber)
     {
@@ -228,10 +243,10 @@ public class ConcreteParkingLot implements ParkingLot{
                 if(vehicle.getLeaveTime()==null ||vehicle.getLeaveTime().toString().compareTo(end.toString())>0)
                 {
                     if(vehicle instanceof Car) {
-                        a.add(new Car(vehicle, null));
+                        a.add(new Car(vehicle));
                     }
                     else if(vehicle instanceof Bus) {
-                        a.add(new Bus(vehicle, null));
+                        a.add(new Bus(vehicle));
                     }
                 }
                 else
@@ -258,7 +273,10 @@ public class ConcreteParkingLot implements ParkingLot{
 
         for(Vehicle vehicle: a)
         {
-            ans.add(vehicle.getClass().toString()+" "+vehicle.getPlateNumber()+" "+vehicle.getAArriveTime().toString()+" "+vehicle.getLeaveTime().toString());
+            ans.add(vehicle.getClassName()+" "+
+                    vehicle.getPlateNumber()+" "+
+                    vehicle.getAArriveTime().toString()+" "+
+                    (vehicle.getLeaveTime()==null? "null":vehicle.getLeaveTime().toString()));
         }
         return ans;
     }

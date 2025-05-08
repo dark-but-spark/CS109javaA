@@ -56,7 +56,7 @@ public class Main //for problem 4
     }
 }
 /* 
-public class Main// for problem 3
+public class w6.Main// for problem 3
 {
     public static boolean check(int x)
     {
@@ -98,7 +98,7 @@ public class Main// for problem 3
          scanf.close();
     }
 }
-public class Main // for problem 2
+public class w6.Main // for problem 2
  {
 
     public static void main(String[] args) {
@@ -144,7 +144,7 @@ public class Main // for problem 2
     }
 
 }
-public class Main //for problem 1
+public class w6.Main //for problem 1
 {
     public static void main(String[] args) {
         Scanner scanf=new Scanner(System.in);

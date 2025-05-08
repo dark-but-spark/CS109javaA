@@ -22,9 +22,9 @@ public class spring25A5LocalTest {
     public void test01Reflect() {
         Class<?> clzVehicle = Vehicle.class;
         String[] expectFieldsVehicle = {
-                "protected java.lang.String Vehicle.plateNumber",
-                "protected boolean Vehicle.isInside",
-                "protected Time Vehicle.arriveTime"
+                "protected java.lang.String w6.Vehicle.plateNumber",
+                "protected boolean w6.Vehicle.isInside",
+                "protected w6.Time w6.Vehicle.arriveTime"
         };
         ArrayList<String> fieldsVehicle = new ArrayList<>();
         for(Field field: clzVehicle.getDeclaredFields()) {
@@ -54,9 +54,9 @@ public class spring25A5LocalTest {
         Vehicle bus = new Bus("B12345");
 
         bus.setArriveTime(new Time(7,20));
-        assertEquals("Bus B12345 true", bus.toString());
+        assertEquals("w6.Bus B12345 true", bus.toString());
         assertEquals(0, bus.calculateMoney(new Time(7,40)));
-        assertEquals("Bus B12345 false", bus.toString());
+        assertEquals("w6.Bus B12345 false", bus.toString());
 
         bus.setArriveTime(new Time(8,0));
         assertEquals(15, bus.calculateMoney(new Time(8,40)));
@@ -144,9 +144,9 @@ public class spring25A5LocalTest {
     public void test07Car() {
         Vehicle car = new Car("A12345");
         car.setArriveTime(new Time(7,20));
-        assertEquals("Car A12345 true", car.toString());
+        assertEquals("w6.Car A12345 true", car.toString());
         assertEquals(0, car.calculateMoney(new Time(7,40)));
-        assertEquals("Car A12345 false", car.toString());
+        assertEquals("w6.Car A12345 false", car.toString());
 
         car.setArriveTime(new Time(8,0));
         assertEquals(15, car.calculateMoney(new Time(8,50)));

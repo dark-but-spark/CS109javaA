@@ -1,6 +1,5 @@
 package w6;
 
-
 public class Car extends Vehicle {
     public Car(String plateNumber) {
         super(plateNumber);
@@ -9,8 +8,16 @@ public class Car extends Vehicle {
     public Car(String plateNumber, Time arriveTime) {
         super(plateNumber, arriveTime);
     }
-    public Car(Vehicle vehicle,Time leaveTime) {
+    public Car(Vehicle vehicle, Time leaveTime) {
         super(vehicle,leaveTime);
+    }
+    public Car(Vehicle vehicle) {
+        super(vehicle);
+    }
+
+    @Override
+    public String getClassName() {
+        return "w6.Car";
     }
 
     @Override

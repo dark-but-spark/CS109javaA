@@ -10,6 +10,14 @@ public class Bus extends Vehicle {
     public Bus(Vehicle vehicle, Time leaveTime) {
         super(vehicle, leaveTime);
     }
+    public Bus(Vehicle vehicle){super(vehicle);}
+
+    @Override
+    public String getClassName()
+    {
+        return "w6.Bus";
+    }
+
     @Override
     public int calculateMoney(Time leaveTime) {
         if (arriveTime == null) {
